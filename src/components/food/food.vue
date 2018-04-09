@@ -2,12 +2,14 @@
   <transition name="move">
     <div v-show="showFlag" class="food" ref="food">
       <div class="food-content">
+
         <div class="image-header">
           <img :src="food.image">
           <div class="back" @click="hide">
             <i class="icon-arrow_lift"></i>
           </div>
         </div>
+
         <div class="content">
           <h1 class="title">{{food.name}}</h1>
           <div class="detail">
@@ -26,17 +28,22 @@
             </div>
           </transition>
         </div>
+
         <split v-show="food.info"></split>
+
         <div class="info" v-show="food.info">
           <h1 class="title">商品信息</h1>
           <p class="text">{{food.info}}</p>
         </div>
+
         <split></split>
+
         <div class="rating">
           <h1 class="title">商品评价</h1>
           <ratingselect @select="selectRating" @toggle="toggleContent" :selectType="selectType"
                         :onlyContent="onlyContent" :desc="desc"
                         :ratings="food.ratings"></ratingselect>
+
           <div class="rating-wrapper">
             <ul v-show="food.ratings && food.ratings.length">
               <li v-show="needShow(rating.rateType,rating.text)" v-for="rating in food.ratings"

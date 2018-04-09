@@ -196,12 +196,16 @@
         while (count--) {
           let ball = this.balls[count];
           if (ball.show) {
+            // 方法获得相对于视口的位置
             let rect = ball.el.getBoundingClientRect();
+            // x, y小球所在位置相对于小球终点的偏移
             let x = rect.left - 32;
             let y = -(window.innerHeight - rect.top - 22);
-            el.style.display = '';
+            el.style.display = ''; // 让其显示
+            // 外层元素 纵向
             el.style.webkitTransform = `translate3d(0,${y}px,0)`;
             el.style.transform = `translate3d(0,${y}px,0)`;
+            // 内层元素 横向
             let inner = el.getElementsByClassName('inner-hook')[0];
             inner.style.webkitTransform = `translate3d(${x}px,0,0)`;
             inner.style.transform = `translate3d(${x}px,0,0)`;
@@ -210,8 +214,10 @@
       },
       dropping(el, done) {
         /* eslint-disable no-unused-vars */
-        let rf = el.offsetHeight;
+        // 忽略报错
+        let rf = el.offsetHeight;  // 触发浏览器重绘
         this.$nextTick(() => {
+          // 重置状态
           el.style.webkitTransform = 'translate3d(0,0,0)';
           el.style.transform = 'translate3d(0,0,0)';
           let inner = el.getElementsByClassName('inner-hook')[0];
@@ -221,8 +227,8 @@
         });
       },
       afterDrop(el) {
-        let ball = this.dropBalls.shift();
-        if (ball) {
+        let ball = this.dropBalls.shift(); // 取
+        if (ball) { // 重置
           ball.show = false;
           el.style.display = 'none';
         }
